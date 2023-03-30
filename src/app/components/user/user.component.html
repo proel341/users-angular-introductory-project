@@ -1,0 +1,16 @@
+<table class="table-user-shirt-view" *ngIf="user">
+    <tr>
+        <!-- full name-->
+        <td>{{user.first_name}} {{user.last_name}}</td>
+        <!--avatar-->
+        <td class="td-user-avatar" rowspan="2">
+            <img class="img-user-avatar" [src]="user.avatar" [alt]="user.avatar">
+        </td> 
+    </tr>
+    <tr>
+        <!--email-->
+        <td>
+            <a class="a-user-email">{{user.email}}</a>
+        </td>
+    </tr>
+</table>
