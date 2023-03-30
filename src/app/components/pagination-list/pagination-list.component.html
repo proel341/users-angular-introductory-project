@@ -1,0 +1,10 @@
+<div>
+    <ng-container *ngFor="let user of users">
+        <app-user [setUser]="user"></app-user>
+    </ng-container>
+    <div class="paginator">
+        <input type="button" value="<" (click)="previousPage()">
+        {{currentPage}}/{{total_pages}}
+        <input type="button" value=">" (click)="nextPage()">
+    </div>
+</div>
