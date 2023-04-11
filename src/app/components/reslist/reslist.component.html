@@ -1,0 +1,11 @@
+<div>
+    <ng-container *ngFor="let res of resourses">
+        <app-resource [setRes]="res"></app-resource>
+        <br>
+    </ng-container>
+    <div class="paginator">
+        <input type="button" value="<" (click)="previousPage()">
+        {{currentPage}}/{{total_pages}}
+        <input type="button" value=">" (click)="nextPage()">
+    </div>
+</div>

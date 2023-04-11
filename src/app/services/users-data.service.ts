@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { User } from '../components/user/User';
+import { Recource } from '../components/resource/Recource';
 
 @Injectable()
 export class UsersDataService {
@@ -25,8 +26,38 @@ export class UsersDataService {
       }));
   }
 
+  getResByPage(page : number) : Observable<Recource[]> {
+    return this.http.get('https://reqres.in/api/unknown', {
+      params: new HttpParams().set('page', page)}
+    )
+      .pipe(
+        map((data:any)=>{
+          return data["data"].map((res: any) => this.jsonToRes(res));
+        }),
+        catchError(err => {  
+          console.log(err); 
+          this.errorMessage = err.message;
+          return [];
+      }));
+  }
+
   getTotalPage() : Observable<number> {
     return this.http.get('https://reqres.in/api/users', {
+      params: new HttpParams().set('page', 1)}
+    )
+      .pipe(
+        map((data:any)=>{
+          return data["total_pages"];
+        }),
+        catchError(err => {  
+          console.log(err); 
+          this.errorMessage = err.message;
+          return [];
+      }));
+  }
+
+  getTotalRPage() : Observable<number> {
+    return this.http.get('https://reqres.in/api/unknown', {
       params: new HttpParams().set('page', 1)}
     )
       .pipe(
@@ -111,8 +142,19 @@ export class UsersDataService {
         email: obj.email ?? undefined,
         avatar: obj.avatar ?? undefined,
         job: obj.job ?? undefined,
-        createdAt: obj.createdAt ?? undefined
+        createdAt: obj.updatedAt ?? undefined
       } as User))
+  }
+
+  jsonToRes(json : any) : Recource{
+    return this.invoke(json,
+      (obj : any) => ({
+        id: obj.id,
+        name: obj.name,
+        color: obj.color,
+        year: obj.year,
+        pantone_value: obj.pantone_value
+      } as Recource))
   }
 
   invoke(x : any, method : (x :any) => any): any{

@@ -7,9 +7,21 @@ import { catchError, map, Observable } from 'rxjs';
 })
 export class AuthService {
 
+  logined: boolean = false;
   errorMessage : string = '';
 
   constructor(private http: HttpClient) { }
+
+  login(){
+    this.logined = true;
+  }
+  exit(){
+    this.logined = false;
+  }
+  isLogined() : boolean{
+    return this.logined;
+  }
+
 
   postRegistration(email : string, password : string) : Observable<{id: number, token: string}>{
     let body : any = {email: email, password: password};

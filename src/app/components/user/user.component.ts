@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 
 import {User} from './User';
 
@@ -24,5 +24,15 @@ export class UserComponent implements OnInit {
 
   @Input() set setUser(user : User | null){
     if (user) this.user = user; 
+  }
+
+  @Output() deleteClick = new EventEmitter();
+
+  eraseUser(): void {
+    this.deleteClick.emit();    
+  }
+
+  userView(user: User) : void{
+    //console.log(user);
   }
 }

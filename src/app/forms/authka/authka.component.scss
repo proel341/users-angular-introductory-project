@@ -1,0 +1,22 @@
+.form{
+    display: flex;
+    flex-direction: column;
+}
+.form-group{
+    display: flex;
+    width: 230px;
+    flex-direction: row; 
+    align-self: center;
+    justify-content: space-between;
+    padding-top: 1em;
+}
+.button{
+    justify-content: center;
+}
+
+input.ng-touched.ng-invalid{
+    border:solid red 2px;
+}
+input.ng-touched.ng-valid{
+    border:solid green 2px;
+}

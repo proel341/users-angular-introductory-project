@@ -1,0 +1,26 @@
+<div *ngIf="flag; else templ1">
+    <img *ngIf="user?.avatar" class="img-user-avatar" [src]="user?.avatar" [alt]="user?.avatar">
+    <p *ngIf="user?.first_name">{{user?.first_name}}</p>
+    <p *ngIf="user?.last_name">{{user?.last_name}}</p>
+    <i *ngIf="user?.email">{{user?.email}}</i>
+    <p *ngIf="user?.job">{{user?.job}}</p>
+    <p *ngIf="user?.createdAt">{{user?.createdAt}}</p>
+
+    <p><input type="button" value="Редактировать" (click)="change()"></p>
+</div>
+
+<div>
+    <input type="button" value="Назад" (click)="home()">
+</div>
+
+<ng-template #templ1>
+    <img *ngIf="user?.avatar" class="img-user-avatar" [src]="user?.avatar" [alt]="user?.avatar">
+    <p><input type="text" [(ngModel)]="first_name" /> - Имя</p>
+    <p *ngIf="user?.last_name">{{user?.last_name}}</p>
+    <i *ngIf="user?.email">{{user?.email}}</i>
+    <p><input type="text" [(ngModel)]="job" /> - Работа</p>
+
+    <input type="button" value="Сохранить" (click)="save()">
+    <input type="button" value="Отмена" (click)="cancel()">
+</ng-template>
+

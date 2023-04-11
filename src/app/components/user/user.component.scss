@@ -1,23 +1,27 @@
-.table-user-shirt-view{
-    margin-top: 0.5vw;
+.flex-container{
+    display: inline-flex;
 
-    width: 50vw;
-    height: 4vw;
+    width: 325px;
+    justify-content: space-between;
 
-    border-collapse: collapse;
-    border-radius: 3vw;
-
-    background-color: bisque;
+    cursor: pointer;
+}
+.full-info{
+    display: flex;
+}
+.flex-item-button{
+    align-self: center;
+}
+.flex-info{
+    align-self: center;
+    display: flex;
+    flex-direction: column;  
 }
 .a-user-email{
     color: grey;
     font: 1em sans-serif;
 }
-.td-user-avatar{
-    width: 4vw;
-}
 .img-user-avatar{
-    vertical-align: middle;
     border-radius: 50%;
     height: 3vw;
     width: 3vw;

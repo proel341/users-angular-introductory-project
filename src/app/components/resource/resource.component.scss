@@ -1,0 +1,13 @@
+.flex-container{
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 350px;
+}
+.flex2{
+    display: flex;
+    justify-content: space-between;
+}
+.item{
+    padding: 1em;
+}

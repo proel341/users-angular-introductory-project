@@ -1,6 +1,7 @@
 <div>
     <ng-container *ngFor="let user of users">
-        <app-user [setUser]="user"></app-user>
+        <app-user [setUser]="user" (deleteClick)="del(user.id)" (click)="userClick(user)"></app-user>
+        <br>
     </ng-container>
     <div class="paginator">
         <input type="button" value="<" (click)="previousPage()">
@@ -8,3 +9,15 @@
         <input type="button" value=">" (click)="nextPage()">
     </div>
 </div>
+<br>
+<div>
+    <app-reslist></app-reslist>
+</div>
+
+<br>
+<br>
+<br>
+<div>
+    <input type="button" value="Выход" (click)="exit()">
+</div>
+

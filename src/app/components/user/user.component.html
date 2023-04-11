@@ -1,16 +1,10 @@
-<table class="table-user-shirt-view" *ngIf="user">
-    <tr>
-        <!-- full name-->
-        <td>{{user.first_name}} {{user.last_name}}</td>
-        <!--avatar-->
-        <td class="td-user-avatar" rowspan="2">
-            <img class="img-user-avatar" [src]="user.avatar" [alt]="user.avatar">
-        </td> 
-    </tr>
-    <tr>
-        <!--email-->
-        <td>
-            <a class="a-user-email">{{user.email}}</a>
-        </td>
-    </tr>
-</table>
+<div class="flex-container" *ngIf="user">
+    <div class="full-info">
+        <div class="flex-item-avatar"><img class="img-user-avatar" [src]="user.avatar" [alt]="user.avatar"></div>
+        <div class="flex-info">
+            <div class="flex-name">{{user.first_name}} {{user.last_name}}</div>
+            <div class="flex-email"><a class="a-user-email">{{user.email}}</a></div>
+        </div>
+    </div>
+    <div class="flex-item-button"><input type="button" value="Удалить" (click)="eraseUser()"></div>
+</div>

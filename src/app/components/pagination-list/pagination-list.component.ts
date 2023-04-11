@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersDataService } from 'src/app/services/users-data.service';
 import { User } from '../user/User';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-pagination-list',
@@ -9,7 +11,7 @@ import { User } from '../user/User';
 })
 export class PaginationListComponent implements OnInit {
 
-  users: User[] = [];
+  public users: User[] = [];
   currentPage: number = 1;
 
   total_pages: number = 1;
@@ -17,16 +19,10 @@ export class PaginationListComponent implements OnInit {
 
   data: any = null;
 
-  constructor(private usersDataService : UsersDataService){}
+  constructor(private usersDataService : UsersDataService, private auth: AuthService, private router: Router){}
 
   ngOnInit(): void {
     this.updatePage(1);
-    setTimeout(
-      () => {
-        console.log(this.users);
-        console.log(this.total_pages);
-      }, 200
-    )
   }
 
   identify(id: number, user: User) : number{
@@ -36,8 +32,13 @@ export class PaginationListComponent implements OnInit {
   updatePage(page: number){
     this.usersDataService.getTotalPage().subscribe({next: (n: number) => this.total_pages = n});
     this.usersDataService.getUsersByPage(page).subscribe({next: (users: User[]) => this.users = users})
-    console.log(this.currentPage);
-    
+  }
+
+  del(id: number){
+    this.users = this.users.filter((user) => {
+      return user.id != id;
+    });
+    this.usersDataService.deleteUser(id);
   }
 
   nextPage(){
@@ -45,6 +46,16 @@ export class PaginationListComponent implements OnInit {
       this.currentPage++;
       this.updatePage(this.currentPage);
     }
+
+
+    // for(let i = 0; i < Infinity; i++){
+    //   Promise.resolve('promise').then((res) => {console.log(res);
+    //   })
+    //   setTimeout(() => {console.log('timeout');
+    //   console.log(i);
+    //   })
+    // }
+    
   }
 
   previousPage(){
@@ -52,6 +63,15 @@ export class PaginationListComponent implements OnInit {
       this.currentPage--;
       this.updatePage(this.currentPage);
     }
+  }
+
+  exit(){
+    this.auth.exit();
+    this.router.navigate(['']);
+  }
+
+  userClick(user: User){
+    this.router.navigate(['/profile', user.id]);
   }
 
 

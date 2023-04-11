@@ -1,0 +1,8 @@
+<div class="flex-container" *ngIf="recource" (click)="resView(resource)" [style.background-color]="recource.color">
+    <div class="item">{{recource.name}}</div>
+    <div class="flex2">
+        <div class="item">{{recource.year}}</div>
+        <div class="item">{{recource.color}}</div>
+        <div class="item">{{recource.pantone_value}}</div>
+    </div>
+</div>
